@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
 using UnityEngine;
+using System;
+using System.Threading;
 
 
 public class ArduinoPart : MonoBehaviour
 {
-    // Start is called before the first frame updateSerialPort sp
+  /*  // Start is called before the first frame updateSerialPort sp
     float next_time; int ii = 0;
     // Use this for initialization
     void Start()
@@ -49,5 +51,6 @@ public class ArduinoPart : MonoBehaviour
             if (++ii > 9) ii = 0;
         }
     }
-
+*/
 }
+  
