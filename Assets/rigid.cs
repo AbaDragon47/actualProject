@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class rigid : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] GunData gunData;
-    void Shoot()
+    void Start()
     {
-        Debug.Log("shots fired");
         
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
