@@ -14,7 +14,7 @@ public class PlayerBehaviour : MonoBehaviour
         hInput = Input.GetAxis("Horizontal");
         fInput = Input.GetAxis("Vertical");
         //move forward
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * fInput);
-        transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * hInput * 5);
+        transform.Translate(Vector3.up * Time.deltaTime * speed * fInput);
+        transform.Translate(Vector3.right * Time.deltaTime * speed * hInput );
     }
 }
