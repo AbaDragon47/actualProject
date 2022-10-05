@@ -9,7 +9,7 @@ public class PlayerShooting : MonoBehaviour
    
     // will invoke an event/action when mouse is pressed
     // Update is called once per frame
-    void Shoot()
+    private void Update()
     {
         if (Input.GetMouseButton(0))
         {

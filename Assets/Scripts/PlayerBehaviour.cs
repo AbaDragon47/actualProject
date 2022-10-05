@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,11 @@ public class PlayerBehaviour : MonoBehaviour
         hInput = Input.GetAxis("Horizontal");
         fInput = Input.GetAxis("Vertical");
         //move forward
+        if (Input.GetAxis("Vertical")> 0)
+            fInput += 1+1/10;
+        else
+            fInput = Input.GetAxis("Vertical");
+       // Debug.Log(fInput);
         transform.Translate(Vector3.up * Time.deltaTime * speed * fInput);
         transform.Translate(Vector3.right * Time.deltaTime * speed * hInput );
     }
