@@ -20,12 +20,18 @@ public class FollowPlayer : MonoBehaviour
 
     private void Start()
     {
+
         cam = GetComponentInChildren<Camera>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
     {
-        
+        // myinput gets mouse position and ig basis visiion of player based on mouse
+        MyInput();
+        cam.transform.localRotation = Quaternion.Euler(xRot, 0, 0);
+        transform.rotation = Quaternion.Euler(0, yRot, 0);
     }
     void MyInput()
     {
@@ -33,8 +39,10 @@ public class FollowPlayer : MonoBehaviour
         mouseX = Input.GetAxisRaw("Mouse X");
         mouseY = Input.GetAxisRaw("Mouse Y");
 
-        xRot -= mouseX * sensX * multi;
-        yRot += mouseY * sensY * multi;
+        yRot += mouseX * sensX * multi;
+        xRot -= mouseY * sensY * multi;
+
+        xRot = Mathf.Clamp(xRot, -90f, 90f);
     }
 
 
