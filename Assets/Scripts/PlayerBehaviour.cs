@@ -9,7 +9,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Movement")]
     private float speed = 1f;
-    float movementMult=10f;
+    [SerializeField] float movementMult=10f;
     [SerializeField] float airMult = 0.4f;
     //rbDrag = 6f;
     
@@ -23,6 +23,8 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Drag")]
     float groundDrag = 6f;
     float airDrag = 2f;
+
+
     
     //private float turnSpeed = 45;
     private float hInput;
@@ -32,8 +34,25 @@ public class PlayerBehaviour : MonoBehaviour
     bool isGrounded;
 
     Vector3 moveDirection;
+    Vector3 slopeMoveDirect;
     Rigidbody rb;
 
+    RaycastHit slopeHit;
+    private bool OnSlope()
+    {
+        if(Physics.Raycast(transform.position,Vector3.down, out slopeHit, playerHeight/2 + 1f))
+        {
+            if(slopeHit.normal != Vector3.up)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
+    }
 
     private void Start()
     {
@@ -54,6 +73,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void Update()
     {
+        
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.1f);
         //print(isGrounded);
 
@@ -64,6 +84,12 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Jump();
         }
+        if (!Input.GetKeyDown(jumpKey))
+        {
+            rb.AddForce(0, -10, 0);
+        }
+        slopeMoveDirect = Vector3.ProjectOnPlane(moveDirection,slopeHit.normal);
+        
         
         //move forward
        
@@ -91,9 +117,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (isGrounded)
+        if (isGrounded && !OnSlope())
         {
             rb.AddForce(moveDirection.normalized*speed*movementMult, ForceMode.VelocityChange);
+        }
+        else if(isGrounded&& OnSlope())
+        {
+            rb.AddForce(slopeMoveDirect.normalized * speed * movementMult, ForceMode.VelocityChange);
         }
         else if (!isGrounded)
         {
