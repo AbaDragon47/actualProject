@@ -38,6 +38,7 @@ public class PlayerBehaviour : MonoBehaviour
     Rigidbody rb;
 
     RaycastHit slopeHit;
+    
     private bool OnSlope()
     {
         if(Physics.Raycast(transform.position,Vector3.down, out slopeHit, playerHeight/2 + 1f))
@@ -74,6 +75,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         
+        
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.1f);
         //print(isGrounded);
 
@@ -86,7 +88,8 @@ public class PlayerBehaviour : MonoBehaviour
         }
         if (!Input.GetKeyDown(jumpKey))
         {
-            rb.AddForce(0, -10, 0);
+            
+            rb.AddForce(Vector3.down*10f,ForceMode.Acceleration);
         }
         slopeMoveDirect = Vector3.ProjectOnPlane(moveDirection,slopeHit.normal);
         
