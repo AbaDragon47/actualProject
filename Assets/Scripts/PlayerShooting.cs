@@ -18,6 +18,7 @@ public class PlayerShooting : MonoBehaviour
         {
             shootInput?.Invoke();
             // ? is a null operation and will avoid a null exception
+            
         }
         if (Input.GetKeyDown(reloadKey))
         {
