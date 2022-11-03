@@ -8,7 +8,8 @@ public class Gun : MonoBehaviour, IDamagable
     // Start is called before the first frame update
     float timeSinceLastShot;
     //public Target x;
-    
+
+    public reloading whatAmIAt;
 
     [Header("References")]
     [SerializeField] private GunData gunData;
@@ -64,16 +65,16 @@ public class Gun : MonoBehaviour, IDamagable
                 if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, gunData.maxDist)&&hitInfo.transform.tag=="Target")
                 {
                     Debug.Log(hitInfo.transform.name+" shots fired");
-                    IDamagable damagable = hitInfo.transform.GetComponent<IDamagable>();
-                    //Debug.Log(damagable);
+                    IDamagable damagable = hitInfo.collider.gameObject.GetComponentInParent<IDamagable>();
+                    Debug.Log("Damagable= "+damagable);
+                    Debug.Log("idk why this didnt work: "+hitInfo.collider.gameObject.GetComponent<IDamagable>());
                     damagable?.TakeDamage(gunData.damage);
-                   //Debug.Log(gunData.damage);
-                    
-                    //x.TakeDamage(gunData.damage);
-                    
+                    gunData.currentAmmo--;
+                    whatAmIAt.currentAmmo();
                 }
 
                 gunData.currentAmmo--;
+                whatAmIAt.currentAmmo();
                 timeSinceLastShot = 0;
                 OnGunShot();
             }

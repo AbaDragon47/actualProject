@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    public playerHealth healthBar;
+    public int maxHealth = 100;
+    public int currrentHealth;
+
+    
     float playerHeight = 2f;
 
     [Header("Movement")]
@@ -57,6 +62,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Start()
     {
+        currrentHealth = maxHealth;
+        //healthBar.SetMaxHealth(maxHealth);
+
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation=true;
     }
@@ -134,7 +142,12 @@ public class PlayerBehaviour : MonoBehaviour
         }
         
     }
-    /* public void amp()
+    /*public void TakeDamage(int damage)
+    {
+        currrentHealth -= damage;
+        healthBar.setHealth(currrentHealth);
+    }
+     public void amp()
 {
     I am currently at 4:40
 }*/
