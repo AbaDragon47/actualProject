@@ -11,6 +11,7 @@ public class playerHealth : MonoBehaviour
     public Gradient gradient;
     // Start is called before the first frame update
     public Image fill;
+    public Target target;
 
 
     public void SetMaxHealth(int health)
@@ -23,11 +24,8 @@ public class playerHealth : MonoBehaviour
 
     public void setHealth(int health)
     {
-        Debug.Log(health);
         slider.value = health;
-        fill.color = gradient.Evaluate(slider.normalizedValue);
-        if (health <= 0)
-            Destroy(gameObject);
+        Debug.Log("setHealth method");
     }
 
 

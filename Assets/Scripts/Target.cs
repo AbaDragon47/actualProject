@@ -17,11 +17,11 @@ public class Target : MonoBehaviour, IDamagable
     
     public void TakeDamage(float damage)
     {
-        //Debug.Log("hi");
         Health -= (int)damage;
         bar.setHealth(Health);
-        Debug.Log(Health);
-        if (Health <= 0)
+        bool dead = Health < 0? true:false;
+        Debug.Log(dead);
+        if (Health < 0)
         {
             Debug.Log("health is less than 0");
             Destroy(gameObject);

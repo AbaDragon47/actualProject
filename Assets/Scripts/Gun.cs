@@ -67,10 +67,10 @@ public class Gun : MonoBehaviour, IDamagable
                     Debug.Log(hitInfo.transform.name+" shots fired");
                     IDamagable damagable = hitInfo.collider.gameObject.GetComponentInParent<IDamagable>();
                     Debug.Log("Damagable= "+damagable);
-                    Debug.Log("idk why this didnt work: "+hitInfo.collider.gameObject.GetComponent<IDamagable>());
+                    //Debug.Log();
                     damagable?.TakeDamage(gunData.damage);
-                    gunData.currentAmmo--;
                     whatAmIAt.currentAmmo();
+                    Debug.Log("did take damage");
                 }
 
                 gunData.currentAmmo--;
@@ -100,6 +100,7 @@ public class Gun : MonoBehaviour, IDamagable
 
     public void TakeDamage(float damage)
     {
-        Debug.Log(gunData.damage);
+       
+        Debug.Log("the inside part dont work");
     }
 }

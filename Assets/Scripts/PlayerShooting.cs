@@ -8,6 +8,7 @@ public class PlayerShooting : MonoBehaviour
     // so Im thinking that Action creates and event? Maybe similar to how scratch had events you send around;
     public static Action shootInput;
     public static Action reloadInput;
+    //public reloading whatAmIAt;
     // will invoke an event/action when mouse is pressed
     // Update is called once per frame
 
