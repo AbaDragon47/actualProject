@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerBehaviour : NetworkBehaviour
+public class PlayerBehaviour : ClientNetworkTransform
 {
     public playerHealth healthBar;
     public int maxHealth = 100;
@@ -63,6 +64,8 @@ public class PlayerBehaviour : NetworkBehaviour
 
     private void Start()
     {
+        if (!IsLocalPlayer || !IsOwner)
+            return;
         currrentHealth = maxHealth;
         //healthBar.SetMaxHealth(maxHealth);
 
@@ -83,7 +86,7 @@ public class PlayerBehaviour : NetworkBehaviour
     }
     void Update()
     {
-        if (!IsOwner)
+        if (!IsLocalPlayer||!IsOwner)
             return;
         
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.1f);
