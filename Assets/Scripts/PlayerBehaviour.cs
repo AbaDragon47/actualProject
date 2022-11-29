@@ -92,7 +92,8 @@ public class PlayerBehaviour : NetworkBehaviour
         Movement();
         ControlDrag();
 
-        if(Input.GetKeyDown(jumpKey))
+        if (Input.GetKeyDown(jumpKey) && isGrounded)
+            Debug.Log("can jump");
         {
             Jump();
         }
