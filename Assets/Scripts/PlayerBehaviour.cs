@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehaviour : NetworkBehaviour
 {
     public playerHealth healthBar;
     public int maxHealth = 100;
@@ -83,6 +83,8 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void Update()
     {
+        if (!IsOwner)
+            return;
         
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.1f);
         //print(isGrounded);
