@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using UnityEngine;
 
-public class FollowPlayer : MonoBehaviour
+public class FollowPlayer : ClientNetworkTransform
 {
     // public GameObject player;
     //private Vector3 offset = new Vector3(-2, 2, -3);
@@ -35,6 +36,8 @@ public class FollowPlayer : MonoBehaviour
     }
     void MyInput()
     {
+        if (!IsLocalPlayer)
+            return;
 
         mouseX = Input.GetAxisRaw("Mouse X");
         mouseY = Input.GetAxisRaw("Mouse Y");

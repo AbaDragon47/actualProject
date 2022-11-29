@@ -5,7 +5,7 @@ using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerBehaviour : ClientNetworkTransform
+public class PlayerBehaviour : MonoBehaviour
 {
     public playerHealth healthBar;
     public int maxHealth = 100;
@@ -64,8 +64,6 @@ public class PlayerBehaviour : ClientNetworkTransform
 
     private void Start()
     {
-        if (!IsLocalPlayer || !IsOwner)
-            return;
         currrentHealth = maxHealth;
         //healthBar.SetMaxHealth(maxHealth);
 
@@ -84,10 +82,8 @@ public class PlayerBehaviour : ClientNetworkTransform
             rb.drag = airDrag;
         }
     }
-    void Update()
+    void UpdateClient()
     {
-        if (!IsLocalPlayer||!IsOwner)
-            return;
         
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.1f);
         //print(isGrounded);
