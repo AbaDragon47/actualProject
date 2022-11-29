@@ -5,7 +5,11 @@ using Unity.Netcode;
 using UnityEngine;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class PlayerBehaviour : MonoBehaviour
+=======
+public class PlayerBehaviour : NetworkBehaviour
+>>>>>>> parent of 5e0053c (before break)
 =======
 public class PlayerBehaviour : NetworkBehaviour
 >>>>>>> parent of 5e0053c (before break)
@@ -88,7 +92,10 @@ public class PlayerBehaviour : NetworkBehaviour
     void UpdateClient()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 5e0053c (before break)
         if (!IsOwner)
             return;
 >>>>>>> parent of 5e0053c (before break)
