@@ -275,20 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a09e7e19b183fb04e944c3b643b83cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  InLocalSpace: 0
-  Interpolate: 1
   sensX: 100
   sensY: 100
 --- !u!114 &2197532028106977329
@@ -373,7 +359,7 @@ MonoBehaviour:
   healthBar: {fileID: 2197532029788479611}
   maxHealth: 100
   currrentHealth: 0
-  movementMult: 10
+  movementMult: 4
   airMult: 0.4
   jumpForce: 5
   jumpKey: 32
