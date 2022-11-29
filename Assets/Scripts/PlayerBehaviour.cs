@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using Unity.Netcode;
 using UnityEngine;
 
+<<<<<<< HEAD
 public class PlayerBehaviour : MonoBehaviour
+=======
+public class PlayerBehaviour : NetworkBehaviour
+>>>>>>> parent of 5e0053c (before break)
 {
     public playerHealth healthBar;
     public int maxHealth = 100;
@@ -84,6 +87,11 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void UpdateClient()
     {
+<<<<<<< HEAD
+=======
+        if (!IsOwner)
+            return;
+>>>>>>> parent of 5e0053c (before break)
         
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.1f);
         //print(isGrounded);

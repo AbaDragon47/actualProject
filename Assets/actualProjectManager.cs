@@ -1,11 +1,10 @@
 
-using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using Unity.Netcode;
 using UnityEngine;
 
 namespace actualProject
 {
-    public class actualProjectManager : ClientNetworkTransform
+    public class actualProjectManager : MonoBehaviour
     {
         void OnGUI()
         {
