@@ -5,7 +5,7 @@ using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerBehaviour : NetworkBehaviour
+public class PlayerBehaviour : ClientNetworkTransformm
 {
     public playerHealth healthBar;
     public int maxHealth = 100;
