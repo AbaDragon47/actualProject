@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -30,8 +31,10 @@ public class PlayerBehaviour : NetworkBehaviour
     float groundDrag = 6f;
     float airDrag = 2f;
 
+    //private NetworkVariable<float> fBpos = new NetworkVariable<float>();
+    //private NetworkVariable<float> lRpos = new NetworkVariable<float>();
 
-    
+
     //private float turnSpeed = 45;
     private float hInput;
     private float fInput;
@@ -81,26 +84,30 @@ public class PlayerBehaviour : NetworkBehaviour
             rb.drag = airDrag;
         }
     }
-    void Update()
+    private void Update()
+    {
+        UpdateClient();
+        UpdateServer();
+    }
+    void UpdateClient()
     {
         if (!IsOwner)
             return;
         
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight / 2 + 0.1f);
-        //print(isGrounded);
+        //debug.log(isGrounded);
 
         Movement();
         ControlDrag();
 
-        if (Input.GetKeyDown(jumpKey) && isGrounded)
-            Debug.Log("can jump");
+        if (Input.GetKeyDown(jumpKey) && isGrounded)    
         {
             Jump();
         }
-        if (!Input.GetKeyDown(jumpKey))
+        else
         {
-            
             rb.AddForce(Vector3.down*10f,ForceMode.Acceleration);
+            //Debug.Log("going down");
         }
         slopeMoveDirect = Vector3.ProjectOnPlane(moveDirection,slopeHit.normal);
         
@@ -111,10 +118,15 @@ public class PlayerBehaviour : NetworkBehaviour
       //  transform.Translate(Vector3.up * Time.deltaTime * speed * fInput);
         //transform.Translate(Vector3.right * Time.deltaTime * speed * hInput );
     }
+    void UpdateServer()
+    {
+        transform.position = new Vector3(transform.position.x+hInput, transform.position.y, transform.position.z+fInput);
+    }
 
     private void Jump()
     {
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        Debug.Log("can jump");
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Acceleration);
     }
 
     void Movement()

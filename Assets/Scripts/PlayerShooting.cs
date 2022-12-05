@@ -18,6 +18,7 @@ public class PlayerShooting : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             shootInput?.Invoke();
+            //Debug.Log("should start shooting");
             // ? is a null operation and will avoid a null exception
             
         }

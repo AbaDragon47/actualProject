@@ -11,7 +11,7 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] private float sensY;
 
 
-    Camera cam;
+    [SerializeField]Camera cam;
 
     float mouseX;
     float mouseY;

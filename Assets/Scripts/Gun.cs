@@ -57,7 +57,7 @@ public class Gun : MonoBehaviour, IDamagable
             if (CanShoot())
             {
                 
-                //Debug.Log("can shoot works");
+                Debug.Log("can shoot works");
                 // whenever we use a variable in a method, it passes by value: makes a copy of the variable
                 //out makes it pass by reference: changes the acutal value in memory => not a copy
                 //Raycast send out a ray that will turn true if the ray intersects with any collider

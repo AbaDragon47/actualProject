@@ -11,7 +11,7 @@ public class playerHealth : MonoBehaviour
     public Gradient gradient;
     // Start is called before the first frame update
     public Image fill;
-    public Target target;
+    //public Target target;
 
 
     public void SetMaxHealth(int health)
