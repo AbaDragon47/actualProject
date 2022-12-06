@@ -1,20 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerBehaviour : ClientNetworkTransformm
+public class PlayerBehaviour : NetworkBehaviour
 {
+    
     public playerHealth healthBar;
     public int maxHealth = 100;
     public int currrentHealth;
 
-    
+    public Camera x;
     float playerHeight = 2f;
 
     [Header("Movement")]
+ 
     private float speed = 1f;
     [SerializeField] float movementMult=10f;
     [SerializeField] float airMult = 0.4f;
@@ -86,9 +84,42 @@ public class PlayerBehaviour : ClientNetworkTransformm
     }
     private void Update()
     {
+
         UpdateClient();
         UpdateServer();
+        if (IsLocalPlayer)
+        {
+            CmdPosServerRpc(transform.position);
+            x.enabled = true;
+        }
+        else
+            x.enabled = false;
+            
     }
+
+    [ServerRpc]
+    void CmdPosServerRpc(Vector3 position)
+    {
+        // we trust the player :)
+        transform.position = position;
+    }
+
+   /* public override bool OnSerialize(NetworkWriter writer, bool initialState)
+    {
+        writer.Write(transform.position);
+        return true;
+    }
+
+    public override void OnDeserialize(NetworkReader reader, bool initialState)
+    {
+        if (IsLocalPlayer)
+        {
+            return;
+        }
+
+        transform.position = reader.ReadVector3();
+    }*/
+
     void UpdateClient()
     {
         if (!IsOwner)
@@ -136,12 +167,14 @@ public class PlayerBehaviour : ClientNetworkTransformm
 
         moveDirection = transform.forward * fInput + transform.right * hInput;
     }
+    
     private void FixedUpdate()
     {
-        MovePlayer();
+        MovePlayerServerRpc();
     }
 
-    private void MovePlayer()
+    [ServerRpc]
+    private void MovePlayerServerRpc()
     {
         if (isGrounded && !OnSlope())
         {

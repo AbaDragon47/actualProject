@@ -18,7 +18,7 @@ public class FollowPlayer : MonoBehaviour
 
     float multi = .01f;
     float xRot, yRot;
-
+    
     private void Start()
     {
 
