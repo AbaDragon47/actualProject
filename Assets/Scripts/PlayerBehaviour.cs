@@ -44,6 +44,7 @@ public class PlayerBehaviour : NetworkBehaviour
     Vector3 slopeMoveDirect;
     Rigidbody rb;
 
+
     RaycastHit slopeHit;
     
     private bool OnSlope()
@@ -69,6 +70,8 @@ public class PlayerBehaviour : NetworkBehaviour
 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation=true;
+        if(IsOwner&&IsLocalPlayer)
+            StartCam();
     }
     void ControlDrag()
     {
@@ -170,7 +173,8 @@ public class PlayerBehaviour : NetworkBehaviour
     
     private void FixedUpdate()
     {
-        MovePlayerServerRpc();
+        if(IsOwner&&IsLocalPlayer)
+            MovePlayerServerRpc();
     }
 
     [ServerRpc]
@@ -190,13 +194,47 @@ public class PlayerBehaviour : NetworkBehaviour
         }
         
     }
-    /*public void TakeDamage(int damage)
+    // Follow Player
+    [SerializeField] private float sensX;
+    [SerializeField] private float sensY;
+
+
+    [SerializeField] Camera cam;
+
+    float mouseX;
+    float mouseY;
+
+    float multi = .01f;
+    float xRot, yRot;
+
+    private void StartCam()
     {
-        currrentHealth -= damage;
-        healthBar.setHealth(currrentHealth);
+
+        cam = GetComponentInChildren<Camera>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
-     public void amp()
-{
-    I am currently at 4:40
-}*/
+
+    private void UpdateCam()
+    {
+        // myinput gets mouse position and ig basis visiion of player based on mouse
+        if(IsOwner&& IsLocalPlayer)
+            MyInputServerRpc();
+        cam.transform.localRotation = Quaternion.Euler(xRot, 0, 0);
+        transform.rotation = Quaternion.Euler(0, yRot, 0);
+    }
+
+    [ServerRpc]
+    void MyInputServerRpc()
+    {
+
+
+        mouseX = Input.GetAxisRaw("Mouse X");
+        mouseY = Input.GetAxisRaw("Mouse Y");
+
+        yRot += mouseX * sensX * multi;
+        xRot -= mouseY * sensY * multi;
+
+        xRot = Mathf.Clamp(xRot, -90f, 90f);
+    }
 }

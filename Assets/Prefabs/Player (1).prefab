@@ -360,10 +360,14 @@ MonoBehaviour:
   healthBar: {fileID: 2197532029788479611}
   maxHealth: 100
   currrentHealth: 0
+  x: {fileID: 2197532030021225060}
   movementMult: 4
   airMult: 0.4
   jumpForce: 500
   jumpKey: 32
+  sensX: 0
+  sensY: 0
+  cam: {fileID: 2197532030021225060}
 --- !u!1 &2197532028339796519
 GameObject:
   m_ObjectHideFlags: 0
